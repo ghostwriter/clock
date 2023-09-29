@@ -39,7 +39,7 @@ trait ClockTrait
 
     final public static function withSystemTimezone(): SystemClockInterface
     {
-        return new SystemClock();
+        return SystemClock::create();
     }
 
     final public static function withTimezone(string $timezone): LocalizedClockInterface
