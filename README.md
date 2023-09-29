@@ -1,56 +1,31 @@
-# wip
+# clock
 
-[![Compliance](https://github.com/ghostwriter/wip/actions/workflows/compliance.yml/badge.svg)](https://github.com/ghostwriter/wip/actions/workflows/compliance.yml)
-[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/wip?color=8892bf)](https://www.php.net/supported-versions)
-[![Mutation Coverage](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fghostwriter%2Fwip%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/ghostwriter/wip/main)
-[![Code Coverage](https://codecov.io/gh/ghostwriter/wip/branch/main/graph/badge.svg?token=UPDATE_TOKEN)](https://codecov.io/gh/ghostwriter/wip)
-[![Type Coverage](https://shepherd.dev/github/ghostwriter/wip/coverage.svg)](https://shepherd.dev/github/ghostwriter/wip)
-[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/wip)](https://packagist.org/packages/ghostwriter/wip)
-[![Downloads](https://badgen.net/packagist/dt/ghostwriter/wip?color=blue)](https://packagist.org/packages/ghostwriter/wip)
+[![Compliance](https://github.com/ghostwriter/clock/actions/workflows/compliance.yml/badge.svg)](https://github.com/ghostwriter/clock/actions/workflows/compliance.yml)
+[![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/clock?color=8892bf)](https://www.php.net/supported-versions)
+[![GitHub Sponsors](https://img.shields.io/github/sponsors/ghostwriter?label=Sponsor+@ghostwriter/clock&logo=GitHub+Sponsors)](https://github.com/sponsors/ghostwriter)
+[![Mutation Coverage](https://img.shields.io/endpoint?style=flat&url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fghostwriter%2Fclock%2Fmain)](https://dashboard.stryker-mutator.io/reports/github.com/ghostwriter/clock/main)
+[![Code Coverage](https://codecov.io/gh/ghostwriter/clock/branch/main/graph/badge.svg)](https://codecov.io/gh/ghostwriter/clock)
+[![Type Coverage](https://shepherd.dev/github/ghostwriter/clock/coverage.svg)](https://shepherd.dev/github/ghostwriter/clock)
+[![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/clock)](https://packagist.org/packages/ghostwriter/clock)
+[![Downloads](https://badgen.net/packagist/dt/ghostwriter/clock?color=blue)](https://packagist.org/packages/ghostwriter/clock)
 
-work in progress
-
-> **Warning**
->
-> This project is not finished yet, work in progress.
-
+Provides a Clock implementation for PHP
 
 ## Installation
 
 You can install the package via composer:
 
 ``` bash
-composer require ghostwriter/wip
+composer require ghostwriter/clock
 ```
 
-## Usage
-
-```php
-// work in progress
-```
-
-## Testing
-
-``` bash
-composer test
-```
-
-## Changelog
+### Changelog
 
 Please see [CHANGELOG.md](./CHANGELOG.md) for more information what has changed recently.
 
-## Security
+### Security
 
-If you discover any security related issues, please email `nathanael.esayeas@protonmail.com` instead of using the issue tracker.
-
-## Support
-
-[[`Become a GitHub Sponsor`](https://github.com/sponsors/ghostwriter)]
-
-## Credits
-
-- [Nathanael Esayeas](https://github.com/ghostwriter)
-- [All Contributors](https://github.com/ghostwriter/wip/contributors)
+If you discover any security related issues, please email `nathanael.esayeas@protonmail.com` or create a [Security Advisory](https://github.com/ghostwriter/clock/security/advisories/new) instead of using the issue tracker.
 
 ## License
 
