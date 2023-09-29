@@ -22,8 +22,18 @@ final readonly class SystemClock implements SystemClockInterface
 {
     use ClockTrait;
 
+    public function __construct(
+        private readonly DateTimeZone $timezone
+    ) {
+    }
+
+    public static function create(): SystemClockInterface
+    {
+        return new self(new DateTimeZone(date_default_timezone_get()));
+    }
+
     public function now(): DateTimeImmutable
     {
-        return new DateTimeImmutable('now', new DateTimeZone(date_default_timezone_get()));
+        return new DateTimeImmutable('now', $this->timezone);
     }
 }
