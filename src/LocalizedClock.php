@@ -27,9 +27,6 @@ final readonly class LocalizedClock implements LocalizedClockInterface
     ) {
     }
 
-    /**
-     * Returns the current time as a DateTimeImmutable Object.
-     */
     public function now(): DateTimeImmutable
     {
         return new DateTimeImmutable('now', $this->timezone);
