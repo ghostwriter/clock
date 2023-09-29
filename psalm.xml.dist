@@ -2,7 +2,7 @@
 <psalm
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns="https://getpsalm.org/schema/config"
-    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    xsi:schemaLocation="https://getpsalm.org/schema/config https://getpsalm.org/schema/config"
     allowInternalNamedArgumentCalls="false"
     allowNamedArgumentCalls="false"
     cacheDirectory=".cache/psalm"
@@ -23,12 +23,7 @@
         <directory name="tests"/>
         <ignoreFiles>
             <directory name=".github"/>
-            <directory name="config"/>
-            <directory name="docs"/>
-            <directory name="fixtures"/>
             <directory name="vendor"/>
-            <file name="ecs.php"/>
-            <file name="rector.php"/>
         </ignoreFiles>
     </projectFiles>
     <plugins>
