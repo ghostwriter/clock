@@ -36,7 +36,7 @@ final class SystemClockTest extends TestCase
 
     public function testDefaultUTCTimezone(): void
     {
-        $clock = new SystemClock();
+        $clock = SystemClock::create();
 
         $now = $clock->now();
 
@@ -45,7 +45,7 @@ final class SystemClockTest extends TestCase
 
     public function testFreeze(): void
     {
-        $clock = new SystemClock();
+        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
 
         $now = $clock->now();
 
@@ -60,7 +60,7 @@ final class SystemClockTest extends TestCase
 
     public function testInstanceOfClockInterface(): void
     {
-        $clock = new SystemClock();
+        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
 
         static::assertInstanceOf(ClockInterface::class, $clock);
         static::assertInstanceOf(SystemClockInterface::class, $clock);
@@ -69,7 +69,7 @@ final class SystemClockTest extends TestCase
 
     public function testNow(): void
     {
-        $clock = new SystemClock();
+        $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
 
         static::assertNotSame($clock->now(), $clock->now());
     }
