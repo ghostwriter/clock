@@ -18,6 +18,42 @@ You can install the package via composer:
 composer require ghostwriter/clock
 ```
 
+### Usage
+
+``` php
+use DateTimeImmutable;
+use DateTimeZone;
+use Ghostwriter\Clock\FrozenClock;
+use Ghostwriter\Clock\LocalizedClock;
+use Ghostwriter\Clock\SystemClock;
+
+date_default_timezone_get('America/New_York');
+$systemClock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
+$systemClock->now(); // DateTimeImmutable
+$systemClock->now()->getTimezone()->getName(); // America/New_York
+
+
+date_default_timezone_get('America/Los_Angeles');
+$systemClock = SystemClock::create();
+$systemClock->now(); // DateTimeImmutable
+$systemClock->now()->getTimezone()->getName(); // America/Los_Angeles
+
+
+$localizedClock = new LocalizedClock(new DateTimeZone('Africa/Addis_Ababa'));
+$localizedClock->now(); // DateTimeImmutable
+$localizedClock->now()->getTimezone()->getName(); // Africa/Addis_Ababa
+
+
+$localizedClock = new LocalizedClock();
+$localizedClock->now(); // DateTimeImmutable
+$localizedClock->now()->getTimezone()->getName(); // UTC
+
+
+$frozenClock = new FrozenClock(new DateTimeImmutable('now', new DateTimeZone('UTC')));
+$frozenClock->now(); // DateTimeImmutable
+$frozenClock->now()->getTimezone()->getName(); // UTC
+```
+
 ### Changelog
 
 Please see [CHANGELOG.md](./CHANGELOG.md) for more information what has changed recently.
