@@ -42,6 +42,7 @@ trait ClockTrait
         return SystemClock::create();
     }
 
+    /** @param non-empty-string $timezone */
     final public static function withTimezone(string $timezone): LocalizedClockInterface
     {
         return new LocalizedClock(new DateTimeZone($timezone));
