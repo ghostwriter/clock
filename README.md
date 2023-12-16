@@ -1,4 +1,4 @@
-# clock
+# Clock
 
 [![Compliance](https://github.com/ghostwriter/clock/actions/workflows/compliance.yml/badge.svg)](https://github.com/ghostwriter/clock/actions/workflows/compliance.yml)
 [![Supported PHP Version](https://badgen.net/packagist/php/ghostwriter/clock?color=8892bf)](https://www.php.net/supported-versions)
@@ -8,7 +8,7 @@
 [![Latest Version on Packagist](https://badgen.net/packagist/v/ghostwriter/clock)](https://packagist.org/packages/ghostwriter/clock)
 [![Downloads](https://badgen.net/packagist/dt/ghostwriter/clock?color=blue)](https://packagist.org/packages/ghostwriter/clock)
 
-Provides a Clock implementation for PHP
+Provides an immutable Clock implementation for PHP
 
 ## Installation
 
@@ -21,37 +21,61 @@ composer require ghostwriter/clock
 ### Usage
 
 ``` php
-use DateTimeImmutable;
-use DateTimeZone;
-use Ghostwriter\Clock\FrozenClock;
-use Ghostwriter\Clock\LocalizedClock;
-use Ghostwriter\Clock\SystemClock;
-
-date_default_timezone_set('America/New_York');
-$systemClock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
-$systemClock->now(); // DateTimeImmutable
-$systemClock->now()->getTimezone()->getName(); // America/New_York
-
+<?php
 
 date_default_timezone_set('America/Los_Angeles');
-$systemClock = SystemClock::create();
+$systemClock = SystemClock::new();
 $systemClock->now(); // DateTimeImmutable
 $systemClock->now()->getTimezone()->getName(); // America/Los_Angeles
 
+date_default_timezone_set('America/New_York');
+$systemClock = SystemClock::new(new DateTimeZone(date_default_timezone_get()));
+$systemClock->now(); // DateTimeImmutable
+$systemClock->now()->getTimezone()->getName(); // America/New_York
 
-$localizedClock = new LocalizedClock(new DateTimeZone('Africa/Addis_Ababa'));
-$localizedClock->now(); // DateTimeImmutable
-$localizedClock->now()->getTimezone()->getName(); // Africa/Addis_Ababa
-
-
-$localizedClock = new LocalizedClock();
+$localizedClock = LocalizedClock::new();
 $localizedClock->now(); // DateTimeImmutable
 $localizedClock->now()->getTimezone()->getName(); // UTC
 
+$localizedClock = LocalizedClock::new(new DateTimeZone('Africa/Addis_Ababa'));
+$localizedClock->now(); // DateTimeImmutable
+$localizedClock->now()->getTimezone()->getName(); // Africa/Addis_Ababa
 
-$frozenClock = new FrozenClock(new DateTimeImmutable('now', new DateTimeZone('UTC')));
+$frozenClock = FrozenClock::new(new DateTimeImmutable('now', new DateTimeZone('UTC')));
 $frozenClock->now(); // DateTimeImmutable
 $frozenClock->now()->getTimezone()->getName(); // UTC
+```
+
+### API
+
+``` php
+interface ClockInterface
+{
+    public function freeze(): FrozenClockInterface;
+
+    public function now(): DateTimeImmutable;
+
+    public function withDateTimeZone(DateTimeZone $dateTimeZone): LocalizedClockInterface;
+
+    public function withSystemTimezone(): LocalizedClockInterface;
+
+    public function withTimezone(string $timezone): LocalizedClockInterface;
+}
+
+interface FrozenClockInterface extends ClockInterface
+{
+    public static function new(DateTimeImmutable $dateTimeImmutable): self;
+}
+
+interface LocalizedClockInterface extends ClockInterface
+{
+    public static function new(DateTimeZone $dateTimeZone): self;
+}
+
+interface SystemClockInterface extends ClockInterface
+{
+    public static function new(): self;
+}
 ```
 
 ### Changelog
