@@ -6,9 +6,7 @@ namespace Ghostwriter\Clock\Trait;
 
 use DateTimeImmutable;
 use DateTimeZone;
-use Ghostwriter\Clock\Exception\UnsupportedClockException;
-use Ghostwriter\Clock\FrozenClock;
-use Ghostwriter\Clock\Interface\ClockInterface;
+use Ghostwriter\Clock\Exception\CannotChangeTimezoneOfFrozenClockException;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\LocalizedClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
@@ -17,34 +15,40 @@ use Ghostwriter\Clock\SystemClock;
 
 trait ClockTrait
 {
-    final public function freeze(): FrozenClockInterface
-    {
-        if ($this instanceof FrozenClockInterface) {
-            return $this;
-        }
+    abstract public function now(): DateTimeImmutable;
+    abstract public function freeze(): FrozenClockInterface;
 
-        /** @var ClockInterface $this */
-        return new FrozenClock($this->now());
+    /**
+     * @throws CannotChangeTimezoneOfFrozenClockException
+     */
+    final public function withDateTimeZone(DateTimeZone $timezone): LocalizedClockInterface
+    {
+        return match (true) {
+            $this instanceof FrozenClockInterface => throw new CannotChangeTimezoneOfFrozenClockException(),
+            default => LocalizedClock::new($timezone)
+        };
     }
 
-    public function now(): DateTimeImmutable
+    /**
+     * @param non-empty-string $timezone
+     * @throws CannotChangeTimezoneOfFrozenClockException
+     */
+    final public function withTimezone(string $timezone): LocalizedClockInterface
     {
-        throw new UnsupportedClockException();
+        return match (true) {
+            $this instanceof FrozenClockInterface => throw new CannotChangeTimezoneOfFrozenClockException(),
+            default => LocalizedClock::new(new DateTimeZone($timezone))
+        };
     }
 
-    final public static function withDateTimeZone(DateTimeZone $timezone): LocalizedClockInterface
+    /**
+     * @throws CannotChangeTimezoneOfFrozenClockException
+     */
+    final public function withSystemTimezone(): SystemClockInterface
     {
-        return new LocalizedClock($timezone);
-    }
-
-    final public static function withSystemTimezone(): SystemClockInterface
-    {
-        return SystemClock::create();
-    }
-
-    /** @param non-empty-string $timezone */
-    final public static function withTimezone(string $timezone): LocalizedClockInterface
-    {
-        return new LocalizedClock(new DateTimeZone($timezone));
+        return match (true) {
+            $this instanceof FrozenClockInterface => throw new CannotChangeTimezoneOfFrozenClockException(),
+            default => SystemClock::new()
+        };
     }
 }
