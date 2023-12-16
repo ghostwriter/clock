@@ -6,6 +6,7 @@ namespace Ghostwriter\Clock;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
 use Ghostwriter\Clock\Trait\ClockTrait;
 
@@ -14,8 +15,6 @@ use Ghostwriter\Clock\Trait\ClockTrait;
  *
  * @see \Ghostwriter\Clock\Tests\Unit\SystemClockTest
  *
- * @uses ClockTrait
- *
  * @immutable
  */
 final readonly class SystemClock implements SystemClockInterface
@@ -23,17 +22,22 @@ final readonly class SystemClock implements SystemClockInterface
     use ClockTrait;
 
     public function __construct(
-        private readonly DateTimeZone $timezone
+        private DateTimeZone $dateTimeZone
     ) {
     }
 
-    public static function create(): SystemClockInterface
+    public static function new(): SystemClockInterface
     {
         return new self(new DateTimeZone(date_default_timezone_get()));
     }
 
     public function now(): DateTimeImmutable
     {
-        return new DateTimeImmutable('now', $this->timezone);
+        return new DateTimeImmutable('now', $this->dateTimeZone);
+    }
+
+    public function freeze(): FrozenClockInterface
+    {
+        return FrozenClock::new($this->now());
     }
 }
