@@ -13,21 +13,29 @@ use Ghostwriter\Clock\Trait\ClockTrait;
  *
  * @see \Ghostwriter\Clock\Tests\Unit\FrozenClockTest
  *
- * @uses ClockTrait
- *
  * @immutable
  */
 final readonly class FrozenClock implements FrozenClockInterface
 {
     use ClockTrait;
 
-    public function __construct(
-        private readonly DateTimeImmutable $now = new DateTimeImmutable()
+    private function __construct(
+        private DateTimeImmutable $dateTimeImmutable
     ) {
+    }
+
+    public static function new(DateTimeImmutable $dateTimeImmutable = new DateTimeImmutable()): self
+    {
+        return new self($dateTimeImmutable);
     }
 
     public function now(): DateTimeImmutable
     {
-        return $this->now;
+        return $this->dateTimeImmutable;
+    }
+
+    public function freeze(): FrozenClockInterface
+    {
+        return $this;
     }
 }
