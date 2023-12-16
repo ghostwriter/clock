@@ -6,6 +6,7 @@ namespace Ghostwriter\Clock;
 
 use DateTimeImmutable;
 use DateTimeZone;
+use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\LocalizedClockInterface;
 use Ghostwriter\Clock\Trait\ClockTrait;
 
@@ -14,21 +15,29 @@ use Ghostwriter\Clock\Trait\ClockTrait;
  *
  * @see \Ghostwriter\Clock\Tests\Unit\LocalizedClockTest
  *
- * @uses ClockTrait
- *
  * @immutable
  */
 final readonly class LocalizedClock implements LocalizedClockInterface
 {
     use ClockTrait;
 
-    public function __construct(
-        private readonly DateTimeZone $timezone = new DateTimeZone('UTC')
+    private function __construct(
+        private DateTimeZone $dateTimeZone
     ) {
+    }
+
+    public static function new(DateTimeZone $dateTimeZone = new DateTimeZone('UTC')): self
+    {
+        return new self($dateTimeZone);
     }
 
     public function now(): DateTimeImmutable
     {
-        return new DateTimeImmutable('now', $this->timezone);
+        return new DateTimeImmutable('now', $this->dateTimeZone);
+    }
+
+    public function freeze(): FrozenClockInterface
+    {
+        return FrozenClock::new($this->now());
     }
 }

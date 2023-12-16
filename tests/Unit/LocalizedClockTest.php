@@ -24,79 +24,79 @@ final class LocalizedClockTest extends TestCase
 {
     public function testDefaultUTCTimezone(): void
     {
-        $clock = new LocalizedClock();
+        $clock = LocalizedClock::new();
 
         $now = $clock->now();
 
-        static::assertSame('UTC', $now->getTimezone()->getName());
+        self::assertSame('UTC', $now->getTimezone()->getName());
     }
 
     public function testFreeze(): void
     {
-        $clock = new LocalizedClock();
+        $clock = LocalizedClock::new();
 
         $now = $clock->now();
 
         $frozen = $clock->freeze();
 
-        static::assertInstanceOf(LocalizedClock::class, $clock);
+        self::assertInstanceOf(LocalizedClock::class, $clock);
 
-        static::assertInstanceOf(FrozenClockInterface::class, $frozen);
-        static::assertInstanceOf(FrozenClock::class, $frozen);
+        self::assertInstanceOf(FrozenClockInterface::class, $frozen);
+        self::assertInstanceOf(FrozenClock::class, $frozen);
 
-        static::assertSame($now->getTimestamp(), $frozen->now()->getTimestamp());
+        self::assertSame($now->getTimestamp(), $frozen->now()->getTimestamp());
     }
 
     public function testInstanceOfClockInterface(): void
     {
-        $clock = new LocalizedClock();
+        $clock = LocalizedClock::new();
 
-        static::assertInstanceOf(ClockInterface::class, $clock);
-        static::assertInstanceOf(LocalizedClockInterface::class, $clock);
-        static::assertInstanceOf(LocalizedClock::class, $clock);
+        self::assertInstanceOf(ClockInterface::class, $clock);
+        self::assertInstanceOf(LocalizedClockInterface::class, $clock);
+        self::assertInstanceOf(LocalizedClock::class, $clock);
     }
 
     public function testNow(): void
     {
-        $clock = new LocalizedClock();
+        $clock = LocalizedClock::new();
 
-        static::assertNotSame($clock->now(), $clock->now());
+        self::assertNotSame($clock->now(), $clock->now());
     }
 
     public function testWithDateTimeZone(): void
     {
         $timezone = new DateTimeZone('Africa/Addis_Ababa');
 
-        $clock = LocalizedClock::withDateTimezone($timezone);
+        $clock = LocalizedClock::new()->withDateTimeZone($timezone);
 
-        static::assertInstanceOf(LocalizedClockInterface::class, $clock);
+        self::assertInstanceOf(LocalizedClockInterface::class, $clock);
 
-        static::assertInstanceOf(LocalizedClock::class, $clock);
+        self::assertInstanceOf(LocalizedClock::class, $clock);
 
         $now = $clock->now();
 
-        static::assertSame($timezone->getName(), $now->getTimezone()->getName());
+        self::assertSame($timezone->getName(), $now->getTimezone()->getName());
     }
 
     public function testWithSystemTimezone(): void
     {
-        $clock = LocalizedClock::withSystemTimezone();
+        $clock = LocalizedClock::new()->withSystemTimezone();
 
-        static::assertInstanceOf(SystemClockInterface::class, $clock);
+        self::assertInstanceOf(SystemClockInterface::class, $clock);
 
-        static::assertInstanceOf(SystemClock::class, $clock);
+        self::assertInstanceOf(SystemClock::class, $clock);
 
         $now = $clock->now();
 
-        static::assertSame(date_default_timezone_get(), $now->getTimezone()->getName());
+        self::assertSame(date_default_timezone_get(), $now->getTimezone()->getName());
     }
 
     public function testWithTimezone(): void
     {
         $timezone = 'Africa/Addis_Ababa';
 
-        $now = LocalizedClock::withTimezone($timezone)->now();
+        $now = LocalizedClock::new()->withTimezone($timezone)->now();
 
-        static::assertSame($timezone, $now->getTimezone()->getName());
+        self::assertSame($timezone, $now->getTimezone()->getName());
     }
 }
