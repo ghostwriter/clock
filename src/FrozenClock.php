@@ -11,7 +11,7 @@ use Ghostwriter\Clock\Trait\ClockTrait;
 /**
  * A clock that returns frozen time.
  *
- * @see \Ghostwriter\Clock\Tests\Unit\FrozenClockTest
+ * @see \Ghostwriter\ClockTests\Unit\FrozenClockTest
  *
  * @immutable
  */
@@ -24,6 +24,11 @@ final readonly class FrozenClock implements FrozenClockInterface
     ) {
     }
 
+    public function freeze(): FrozenClockInterface
+    {
+        return $this;
+    }
+
     public static function new(DateTimeImmutable $dateTimeImmutable = new DateTimeImmutable()): self
     {
         return new self($dateTimeImmutable);
@@ -32,10 +37,5 @@ final readonly class FrozenClock implements FrozenClockInterface
     public function now(): DateTimeImmutable
     {
         return $this->dateTimeImmutable;
-    }
-
-    public function freeze(): FrozenClockInterface
-    {
-        return $this;
     }
 }
