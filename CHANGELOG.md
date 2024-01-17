@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 
+## [3.0.0] - 2024-01-16
+
+### Added
+
+- Interface Ghostwriter\Clock\Interface\ClockExceptionInterface has been added
+
+### Removed
+    
+- Interface Ghostwriter\Clock\Interface\ExceptionInterface has been deleted
+
 ## [2.0.0] - 2023-12-16
 
 ### Added
