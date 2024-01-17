@@ -6,6 +6,6 @@ namespace Ghostwriter\Clock\Interface;
 
 use Throwable;
 
-interface ExceptionInterface extends Throwable
+interface ClockExceptionInterface extends Throwable
 {
 }
