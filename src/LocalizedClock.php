@@ -13,7 +13,7 @@ use Ghostwriter\Clock\Trait\ClockTrait;
 /**
  * A clock that returns the current time in a given timezone.
  *
- * @see \Ghostwriter\Clock\Tests\Unit\LocalizedClockTest
+ * @see \Ghostwriter\ClockTests\Unit\LocalizedClockTest
  *
  * @immutable
  */
@@ -26,6 +26,11 @@ final readonly class LocalizedClock implements LocalizedClockInterface
     ) {
     }
 
+    public function freeze(): FrozenClockInterface
+    {
+        return FrozenClock::new($this->now());
+    }
+
     public static function new(DateTimeZone $dateTimeZone = new DateTimeZone('UTC')): self
     {
         return new self($dateTimeZone);
@@ -34,10 +39,5 @@ final readonly class LocalizedClock implements LocalizedClockInterface
     public function now(): DateTimeImmutable
     {
         return new DateTimeImmutable('now', $this->dateTimeZone);
-    }
-
-    public function freeze(): FrozenClockInterface
-    {
-        return FrozenClock::new($this->now());
     }
 }
