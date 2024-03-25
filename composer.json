@@ -54,7 +54,10 @@
         "preferred-install": "dist",
         "prepend-autoloader": true,
         "process-timeout": 5000,
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "ghostwriter/coding-standard": true
+        }
     },
     "scripts": {
         "bench": "vendor/ghostwriter/coding-standard/tools/phpbench --colors=always",
