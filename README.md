@@ -27,13 +27,15 @@ You can also star (🌟) this repo to find it easier later.
 ``` php
 <?php
 
+// Internally uses SystemClock::new(new DateTimeZone(date_default_timezone_get()));
+
 date_default_timezone_set('America/Los_Angeles');
 $systemClock = SystemClock::new();
 $systemClock->now(); // DateTimeImmutable
 $systemClock->now()->getTimezone()->getName(); // America/Los_Angeles
 
 date_default_timezone_set('America/New_York');
-$systemClock = SystemClock::new(new DateTimeZone(date_default_timezone_get()));
+$systemClock = SystemClock::new();
 $systemClock->now(); // DateTimeImmutable
 $systemClock->now()->getTimezone()->getName(); // America/New_York
 
