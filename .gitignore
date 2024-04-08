@@ -1,4 +1,3 @@
-/.cache
-/.idea
-/.vscode
-/vendor
+/.cache/
+/vendor/
+/.env
