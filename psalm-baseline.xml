@@ -1,2 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.17.0@c620f6e80d0abfca532b00bda366062aaedf6e5d"/>
+<files psalm-version="5.23.1@8471a896ccea3526b26d082f4461eeea467f10a4">
+  <file src="src/FrozenClock.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function freeze(): FrozenClockInterface]]></code>
+      <code><![CDATA[public function now(): DateTimeImmutable]]></code>
+      <code><![CDATA[public static function new(DateTimeImmutable $dateTimeImmutable = new DateTimeImmutable()): self]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/LocalizedClock.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function freeze(): FrozenClockInterface]]></code>
+      <code><![CDATA[public function now(): DateTimeImmutable]]></code>
+      <code><![CDATA[public static function new(DateTimeZone $dateTimeZone = new DateTimeZone('UTC')): self]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/SystemClock.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[public function freeze(): FrozenClockInterface]]></code>
+      <code><![CDATA[public function now(): DateTimeImmutable]]></code>
+      <code><![CDATA[public static function new(): SystemClockInterface]]></code>
+    </MissingOverrideAttribute>
+  </file>
+  <file src="src/Trait/ClockTrait.php">
+    <MissingOverrideAttribute>
+      <code><![CDATA[final public function withDateTimeZone(DateTimeZone $timezone): LocalizedClockInterface]]></code>
+      <code><![CDATA[final public function withSystemTimezone(): SystemClockInterface]]></code>
+      <code><![CDATA[final public function withTimezone(string $timezone): LocalizedClockInterface]]></code>
+    </MissingOverrideAttribute>
+    <ParamNameMismatch>
+      <code><![CDATA[$timezone]]></code>
+    </ParamNameMismatch>
+  </file>
+</files>
