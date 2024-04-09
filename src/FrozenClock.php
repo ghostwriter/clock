@@ -21,8 +21,7 @@ final readonly class FrozenClock implements FrozenClockInterface
 
     private function __construct(
         private DateTimeImmutable $dateTimeImmutable
-    ) {
-    }
+    ) {}
 
     public function freeze(): FrozenClockInterface
     {
