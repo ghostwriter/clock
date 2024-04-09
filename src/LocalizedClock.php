@@ -23,8 +23,7 @@ final readonly class LocalizedClock implements LocalizedClockInterface
 
     private function __construct(
         private DateTimeZone $dateTimeZone
-    ) {
-    }
+    ) {}
 
     public function freeze(): FrozenClockInterface
     {
