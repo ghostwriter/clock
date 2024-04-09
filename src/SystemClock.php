@@ -9,6 +9,7 @@ use DateTimeZone;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
 use Ghostwriter\Clock\Trait\ClockTrait;
+
 use function date_default_timezone_get;
 
 /**
@@ -24,8 +25,7 @@ final readonly class SystemClock implements SystemClockInterface
 
     public function __construct(
         private DateTimeZone $dateTimeZone
-    ) {
-    }
+    ) {}
 
     public function freeze(): FrozenClockInterface
     {
