@@ -1,34 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.23.1@8471a896ccea3526b26d082f4461eeea467f10a4">
-  <file src="src/FrozenClock.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function freeze(): FrozenClockInterface]]></code>
-      <code><![CDATA[public function now(): DateTimeImmutable]]></code>
-      <code><![CDATA[public static function new(DateTimeImmutable $dateTimeImmutable = new DateTimeImmutable()): self]]></code>
-    </MissingOverrideAttribute>
+<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
+  <file src="tests/Unit/FrozenClockTest.php">
+    <InvalidArgument>
+      <code><![CDATA[ClockTrait::class]]></code>
+    </InvalidArgument>
   </file>
-  <file src="src/LocalizedClock.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function freeze(): FrozenClockInterface]]></code>
-      <code><![CDATA[public function now(): DateTimeImmutable]]></code>
-      <code><![CDATA[public static function new(DateTimeZone $dateTimeZone = new DateTimeZone('UTC')): self]]></code>
-    </MissingOverrideAttribute>
+  <file src="tests/Unit/LocalizedClockTest.php">
+    <InvalidArgument>
+      <code><![CDATA[ClockTrait::class]]></code>
+    </InvalidArgument>
   </file>
-  <file src="src/SystemClock.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[public function freeze(): FrozenClockInterface]]></code>
-      <code><![CDATA[public function now(): DateTimeImmutable]]></code>
-      <code><![CDATA[public static function new(): SystemClockInterface]]></code>
-    </MissingOverrideAttribute>
-  </file>
-  <file src="src/Trait/ClockTrait.php">
-    <MissingOverrideAttribute>
-      <code><![CDATA[final public function withDateTimeZone(DateTimeZone $timezone): LocalizedClockInterface]]></code>
-      <code><![CDATA[final public function withSystemTimezone(): SystemClockInterface]]></code>
-      <code><![CDATA[final public function withTimezone(string $timezone): LocalizedClockInterface]]></code>
-    </MissingOverrideAttribute>
-    <ParamNameMismatch>
-      <code><![CDATA[$timezone]]></code>
-    </ParamNameMismatch>
+  <file src="tests/Unit/SystemClockTest.php">
+    <InvalidArgument>
+      <code><![CDATA[ClockTrait::class]]></code>
+    </InvalidArgument>
   </file>
 </files>
