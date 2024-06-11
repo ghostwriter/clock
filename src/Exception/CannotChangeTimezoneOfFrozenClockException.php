@@ -7,4 +7,6 @@ namespace Ghostwriter\Clock\Exception;
 use BadMethodCallException;
 use Ghostwriter\Clock\Interface\ClockExceptionInterface;
 
-final class CannotChangeTimezoneOfFrozenClockException extends BadMethodCallException implements ClockExceptionInterface {}
+final class CannotChangeTimezoneOfFrozenClockException extends BadMethodCallException implements ClockExceptionInterface
+{
+}
