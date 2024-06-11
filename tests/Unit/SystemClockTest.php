@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ClockTests\Unit;
+namespace Tests\Unit;
 
 use DateTimeZone;
 use Ghostwriter\Clock\FrozenClock;
@@ -13,10 +13,11 @@ use Ghostwriter\Clock\LocalizedClock;
 use Ghostwriter\Clock\SystemClock;
 use Ghostwriter\Clock\Trait\ClockTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\CoversTrait;
 
 use function date_default_timezone_get;
 
-#[CoversClass(ClockTrait::class)]
+#[CoversTrait(ClockTrait::class)]
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(LocalizedClock::class)]
 #[CoversClass(SystemClock::class)]
