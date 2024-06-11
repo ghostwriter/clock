@@ -12,21 +12,20 @@ use Ghostwriter\Clock\Interface\LocalizedClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
 use Ghostwriter\Clock\LocalizedClock;
 use Ghostwriter\Clock\SystemClock;
+use Override;
 
 trait ClockTrait
 {
-    abstract public function freeze(): FrozenClockInterface;
-
-    abstract public function now(): DateTimeImmutable;
-
-    final public function withDateTimeZone(DateTimeZone $timezone): LocalizedClockInterface
+    #[Override]
+    final public function withDateTimeZone(DateTimeZone $dateTimeZone): LocalizedClockInterface
     {
         return match (true) {
             $this instanceof FrozenClockInterface => throw new CannotChangeTimezoneOfFrozenClockException(),
-            default => LocalizedClock::new($timezone)
+            default => LocalizedClock::new($dateTimeZone)
         };
     }
 
+    #[Override]
     final public function withSystemTimezone(): SystemClockInterface
     {
         return match (true) {
@@ -38,6 +37,7 @@ trait ClockTrait
     /**
      * @param non-empty-string $timezone
      */
+    #[Override]
     final public function withTimezone(string $timezone): LocalizedClockInterface
     {
         return match (true) {
@@ -45,4 +45,10 @@ trait ClockTrait
             default => LocalizedClock::new(new DateTimeZone($timezone))
         };
     }
+
+    #[Override]
+    abstract public function freeze(): FrozenClockInterface;
+
+    #[Override]
+    abstract public function now(): DateTimeImmutable;
 }
