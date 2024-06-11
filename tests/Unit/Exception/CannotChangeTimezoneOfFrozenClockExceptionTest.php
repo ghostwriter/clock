@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Ghostwriter\ClockTests\Unit\Exception;
+namespace Tests\Unit\Exception;
 
 use BadMethodCallException;
 use DateTimeZone;
 use Ghostwriter\Clock\Exception\CannotChangeTimezoneOfFrozenClockException;
 use Ghostwriter\Clock\FrozenClock;
 use Ghostwriter\Clock\Interface\ClockExceptionInterface;
-use Ghostwriter\ClockTests\Unit\AbstractTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Tests\Unit\AbstractTestCase;
 
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(CannotChangeTimezoneOfFrozenClockException::class)]
