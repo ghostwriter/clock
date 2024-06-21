@@ -6,7 +6,6 @@ namespace Ghostwriter\Clock;
 
 use DateTimeImmutable;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
-use Ghostwriter\Clock\Trait\ClockTrait;
 use Override;
 
 /**
@@ -18,8 +17,6 @@ use Override;
  */
 final readonly class FrozenClock implements FrozenClockInterface
 {
-    use ClockTrait;
-
     private function __construct(
         private DateTimeImmutable $dateTimeImmutable
     ) {
