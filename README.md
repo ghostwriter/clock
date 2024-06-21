@@ -60,12 +60,6 @@ interface ClockInterface
     public function freeze(): FrozenClockInterface;
 
     public function now(): DateTimeImmutable;
-
-    public function withDateTimeZone(DateTimeZone $dateTimeZone): LocalizedClockInterface;
-
-    public function withSystemTimezone(): LocalizedClockInterface;
-
-    public function withTimezone(string $timezone): LocalizedClockInterface;
 }
 
 interface FrozenClockInterface extends ClockInterface
