@@ -5,17 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
-
-## [3.0.0] - 2024-01-16
-
-### Added
-
-- Interface Ghostwriter\Clock\Interface\ClockExceptionInterface has been added
+## [3.0.0] - 2024-06-21
 
 ### Removed
-    
-- Interface Ghostwriter\Clock\Interface\ExceptionInterface has been deleted
+
+- Class `Ghostwriter\Clock\Exception\CannotChangeTimezoneOfFrozenClockException` removed
+- Class `Ghostwriter\Clock\Interface\ClockExceptionInterface` removed
+- Class `Ghostwriter\Clock\Trait\ClockTrait` removed
+- Method `Ghostwriter\Clock\Interface\ClockInterface::withDateTimeZone()` removed
+- Method `Ghostwriter\Clock\Interface\ClockInterface::withSystemTimezone()` removed
+- Method `Ghostwriter\Clock\Interface\ClockInterface::withTimezone()` removed
+- Method `Ghostwriter\Clock\FrozenClock::withDateTimeZone()` removed
+- Method `Ghostwriter\Clock\FrozenClock::withSystemTimezone()` removed
+- Method `Ghostwriter\Clock\FrozenClock::withTimezone()` removed
+- Method `Ghostwriter\Clock\LocalizedClock::withDateTimeZone()` removed
+- Method `Ghostwriter\Clock\LocalizedClock::withSystemTimezone()` removed
+- Method `Ghostwriter\Clock\LocalizedClock::withTimezone()` removed
+- Method `Ghostwriter\Clock\SystemClock::withDateTimeZone()` removed
+- Method `Ghostwriter\Clock\SystemClock::withSystemTimezone()` removed
+- Method `Ghostwriter\Clock\SystemClock::withTimezone()` removed
 
 ## [2.0.0] - 2023-12-16
 
