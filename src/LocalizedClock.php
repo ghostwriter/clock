@@ -8,8 +8,8 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\LocalizedClockInterface;
-use Ghostwriter\Clock\Trait\ClockTrait;
 use Override;
+use Throwable;
 
 /**
  * A clock that returns the current time in a given timezone.
@@ -20,19 +20,23 @@ use Override;
  */
 final readonly class LocalizedClock implements LocalizedClockInterface
 {
-    use ClockTrait;
-
     private function __construct(
         private DateTimeZone $dateTimeZone
     ) {
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function freeze(): FrozenClockInterface
     {
         return FrozenClock::new($this->now());
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function now(): DateTimeImmutable
     {
