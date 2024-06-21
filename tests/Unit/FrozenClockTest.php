@@ -9,11 +9,8 @@ use Ghostwriter\Clock\Interface\ClockInterface;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\LocalizedClock;
 use Ghostwriter\Clock\SystemClock;
-use Ghostwriter\Clock\Trait\ClockTrait;
 use PHPUnit\Framework\Attributes\CoversClass;
-use PHPUnit\Framework\Attributes\CoversTrait;
 
-#[CoversTrait(ClockTrait::class)]
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(LocalizedClock::class)]
 #[CoversClass(SystemClock::class)]
