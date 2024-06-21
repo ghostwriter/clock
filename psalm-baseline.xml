@@ -1,18 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.24.0@462c80e31c34e58cc4f750c656be3927e80e550e">
-  <file src="tests/Unit/FrozenClockTest.php">
-    <InvalidArgument>
-      <code><![CDATA[ClockTrait::class]]></code>
-    </InvalidArgument>
-  </file>
-  <file src="tests/Unit/LocalizedClockTest.php">
-    <InvalidArgument>
-      <code><![CDATA[ClockTrait::class]]></code>
-    </InvalidArgument>
-  </file>
-  <file src="tests/Unit/SystemClockTest.php">
-    <InvalidArgument>
-      <code><![CDATA[ClockTrait::class]]></code>
-    </InvalidArgument>
-  </file>
-</files>
+<files psalm-version="5.25.0@01a8eb06b9e9cc6cfb6a320bf9fb14331919d505"/>
