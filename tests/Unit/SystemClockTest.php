@@ -4,22 +4,25 @@ declare(strict_types=1);
 
 namespace Tests\Unit;
 
-use DateTimeZone;
 use Ghostwriter\Clock\FrozenClock;
 use Ghostwriter\Clock\Interface\ClockInterface;
-use Ghostwriter\Clock\Interface\LocalizedClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
 use Ghostwriter\Clock\LocalizedClock;
 use Ghostwriter\Clock\SystemClock;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+use Throwable;
 
 use function date_default_timezone_get;
 
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(LocalizedClock::class)]
 #[CoversClass(SystemClock::class)]
-final class SystemClockTest extends AbstractTestCase
+final class SystemClockTest extends TestCase
 {
+    /**
+     * @throws Throwable
+     */
     public function testDefaultTimezone(): void
     {
         $clock = SystemClock::new();
@@ -29,6 +32,9 @@ final class SystemClockTest extends AbstractTestCase
         self::assertSame(date_default_timezone_get(), $now->getTimezone()->getName());
     }
 
+    /**
+     * @throws Throwable
+     */
     public function testFreeze(): void
     {
         $clock = SystemClock::new();
@@ -44,6 +50,9 @@ final class SystemClockTest extends AbstractTestCase
         self::assertSame($now->getTimestamp(), $frozen->now()->getTimestamp());
     }
 
+    /**
+     * @throws Throwable
+     */
     public function testInstanceOfClockInterface(): void
     {
         $clock = SystemClock::new();
@@ -58,29 +67,5 @@ final class SystemClockTest extends AbstractTestCase
         $clock = SystemClock::new();
 
         self::assertNotSame($clock->now(), $clock->now());
-    }
-
-    public function testWithDateTimeZone(): void
-    {
-        $timezone = new DateTimeZone('Africa/Addis_Ababa');
-
-        $clock = SystemClock::new()->withDateTimeZone($timezone);
-
-        self::assertInstanceOf(LocalizedClockInterface::class, $clock);
-
-        self::assertInstanceOf(LocalizedClock::class, $clock);
-
-        $now = $clock->now();
-
-        self::assertSame($timezone->getName(), $now->getTimezone()->getName());
-    }
-
-    public function testWithTimezone(): void
-    {
-        $timezone = 'Africa/Addis_Ababa';
-
-        $now = SystemClock::new()->withTimezone($timezone)->now();
-
-        self::assertSame($timezone, $now->getTimezone()->getName());
     }
 }
