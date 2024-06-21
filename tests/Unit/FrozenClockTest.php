@@ -10,12 +10,17 @@ use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\LocalizedClock;
 use Ghostwriter\Clock\SystemClock;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\TestCase;
+use Throwable;
 
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(LocalizedClock::class)]
 #[CoversClass(SystemClock::class)]
-final class FrozenClockTest extends AbstractTestCase
+final class FrozenClockTest extends TestCase
 {
+    /**
+     * @throws Throwable
+     */
     public function testDefaultTimezone(): void
     {
         $now = FrozenClock::new()->now();
@@ -23,6 +28,9 @@ final class FrozenClockTest extends AbstractTestCase
         self::assertSame('UTC', $now->getTimezone()->getName());
     }
 
+    /**
+     * @throws Throwable
+     */
     public function testFreeze(): void
     {
         $clock = FrozenClock::new();
@@ -42,6 +50,9 @@ final class FrozenClockTest extends AbstractTestCase
         self::assertSame($now->getTimestamp(), $frozenNow->getTimestamp());
     }
 
+    /**
+     * @throws Throwable
+     */
     public function testInstanceOfClockInterface(): void
     {
         $clock = FrozenClock::new();
@@ -51,6 +62,9 @@ final class FrozenClockTest extends AbstractTestCase
         self::assertInstanceOf(FrozenClock::class, $clock);
     }
 
+    /**
+     * @throws Throwable
+     */
     public function testNow(): void
     {
         $clock = FrozenClock::new();
