@@ -8,8 +8,8 @@ use DateTimeImmutable;
 use DateTimeZone;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
-use Ghostwriter\Clock\Trait\ClockTrait;
 use Override;
+use Throwable;
 
 use function date_default_timezone_get;
 
@@ -22,25 +22,32 @@ use function date_default_timezone_get;
  */
 final readonly class SystemClock implements SystemClockInterface
 {
-    use ClockTrait;
-
     public function __construct(
         private DateTimeZone $dateTimeZone
     ) {
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function freeze(): FrozenClockInterface
     {
         return FrozenClock::new($this->now());
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public function now(): DateTimeImmutable
     {
         return new DateTimeImmutable('now', $this->dateTimeZone);
     }
 
+    /**
+     * @throws Throwable
+     */
     #[Override]
     public static function new(): SystemClockInterface
     {
