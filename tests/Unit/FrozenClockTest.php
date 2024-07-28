@@ -33,19 +33,19 @@ final class FrozenClockTest extends TestCase
      */
     public function testFreeze(): void
     {
-        $clock = FrozenClock::new();
+        $frozenClock = FrozenClock::new();
 
-        $now = $clock->now();
+        $now = $frozenClock->now();
 
-        $frozen = $clock->freeze();
+        $frozen = $frozenClock->freeze();
 
         $frozenNow = $frozen->now();
 
-        self::assertInstanceOf(FrozenClock::class, $clock);
+        self::assertInstanceOf(FrozenClock::class, $frozenClock);
         self::assertInstanceOf(FrozenClockInterface::class, $frozen);
         self::assertInstanceOf(FrozenClock::class, $frozen);
 
-        self::assertSame($clock, $frozen);
+        self::assertSame($frozenClock, $frozen);
         self::assertSame($now, $frozenNow);
         self::assertSame($now->getTimestamp(), $frozenNow->getTimestamp());
     }
@@ -55,11 +55,11 @@ final class FrozenClockTest extends TestCase
      */
     public function testInstanceOfClockInterface(): void
     {
-        $clock = FrozenClock::new();
+        $frozenClock = FrozenClock::new();
 
-        self::assertInstanceOf(ClockInterface::class, $clock);
-        self::assertInstanceOf(FrozenClockInterface::class, $clock);
-        self::assertInstanceOf(FrozenClock::class, $clock);
+        self::assertInstanceOf(ClockInterface::class, $frozenClock);
+        self::assertInstanceOf(FrozenClockInterface::class, $frozenClock);
+        self::assertInstanceOf(FrozenClock::class, $frozenClock);
     }
 
     /**
@@ -67,8 +67,8 @@ final class FrozenClockTest extends TestCase
      */
     public function testNow(): void
     {
-        $clock = FrozenClock::new();
+        $frozenClock = FrozenClock::new();
 
-        self::assertSame($clock->now(), $clock->now());
+        self::assertSame($frozenClock->now(), $frozenClock->now());
     }
 }
