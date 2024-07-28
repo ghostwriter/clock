@@ -25,9 +25,9 @@ final class SystemClockTest extends TestCase
      */
     public function testDefaultTimezone(): void
     {
-        $clock = SystemClock::new();
+        $systemClock = SystemClock::new();
 
-        $now = $clock->now();
+        $now = $systemClock->now();
 
         self::assertSame(date_default_timezone_get(), $now->getTimezone()->getName());
     }
@@ -37,17 +37,17 @@ final class SystemClockTest extends TestCase
      */
     public function testFreeze(): void
     {
-        $clock = SystemClock::new();
+        $systemClock = SystemClock::new();
 
-        $now = $clock->now();
+        $now = $systemClock->now();
 
-        $frozen = $clock->freeze();
+        $frozenClock = $systemClock->freeze();
 
-        self::assertInstanceOf(SystemClock::class, $clock);
+        self::assertInstanceOf(SystemClock::class, $systemClock);
 
-        self::assertInstanceOf(FrozenClock::class, $frozen);
+        self::assertInstanceOf(FrozenClock::class, $frozenClock);
 
-        self::assertSame($now->getTimestamp(), $frozen->now()->getTimestamp());
+        self::assertSame($now->getTimestamp(), $frozenClock->now()->getTimestamp());
     }
 
     /**
@@ -55,17 +55,17 @@ final class SystemClockTest extends TestCase
      */
     public function testInstanceOfClockInterface(): void
     {
-        $clock = SystemClock::new();
+        $systemClock = SystemClock::new();
 
-        self::assertInstanceOf(ClockInterface::class, $clock);
-        self::assertInstanceOf(SystemClockInterface::class, $clock);
-        self::assertInstanceOf(SystemClock::class, $clock);
+        self::assertInstanceOf(ClockInterface::class, $systemClock);
+        self::assertInstanceOf(SystemClockInterface::class, $systemClock);
+        self::assertInstanceOf(SystemClock::class, $systemClock);
     }
 
     public function testNow(): void
     {
-        $clock = SystemClock::new();
+        $systemClock = SystemClock::new();
 
-        self::assertNotSame($clock->now(), $clock->now());
+        self::assertNotSame($systemClock->now(), $systemClock->now());
     }
 }
