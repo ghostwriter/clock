@@ -18,7 +18,6 @@
     "homepage": "https://github.com/ghostwriter/clock",
     "support": {
         "issues": "https://github.com/ghostwriter/clock/issues",
-        "forum": "https://github.com/ghostwriter/clock/discussions",
         "source": "https://github.com/ghostwriter/clock",
         "docs": "https://github.com/ghostwriter/clock",
         "rss": "https://github.com/ghostwriter/clock/releases.atom",
@@ -30,15 +29,19 @@
             "url": "https://github.com/sponsors/ghostwriter"
         }
     ],
-    "_comment": "#BlackLivesMatter",
+    "_comment": [
+        "#BlackLivesMatter",
+        "#FreePalestine",
+        "#StandWithUkraine"
+    ],
     "require": {
         "php": ">=8.3"
     },
     "require-dev": {
-        "ghostwriter/coding-standard": "dev-main",
-        "ghostwriter/psalm-plugin": "^0.2.0"
+        "ghostwriter/coding-standard": "@dev",
+        "ghostwriter/psalm-plugin": "@dev"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
@@ -48,11 +51,15 @@
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests"
-        }
+        },
+        "exclude-from-classmap": [
+            "/tests/Fixture/"
+        ]
     },
     "config": {
         "allow-plugins": {
-            "ghostwriter/coding-standard": true
+            "ghostwriter/coding-standard": true,
+            "ghostwriter/handrail": true
         },
         "classmap-authoritative": false,
         "discard-changes": true,
@@ -68,10 +75,10 @@
     },
     "scripts": {
         "bin_ecs": "ecs check --clear-cache --no-interaction",
-        "bin_infection": "infection --ansi --show-mutations --threads=max --min-msi=0 --min-covered-msi=0",
-        "bin_phive": "phive",
-        "bin_phpunit": "phpunit --do-not-cache-result --colors=always",
-        "bin_psalm": "psalm --no-cache",
+        "bin_infection": "vendor/ghostwriter/coding-standard/tools/infection --ansi --show-mutations --threads=max --min-msi=0 --min-covered-msi=0",
+        "bin_phive": "vendor/ghostwriter/coding-standard/tools/phive",
+        "bin_phpunit": "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always",
+        "bin_psalm": "vendor/ghostwriter/coding-standard/tools/psalm --no-cache",
         "bin_rector": "rector process --no-ansi --clear-cache",
         "cache:clear": "rm -rf ./.cache/*",
         "check": [
@@ -95,11 +102,12 @@
         "psalm:alter": "@bin_psalm --alter --allow-backwards-incompatible-changes=false --safe-types",
         "psalm:baseline": "@psalm --no-diff --set-baseline=psalm-baseline.xml",
         "psalm:dry-run": "@psalm:alter --issues=all --dry-run",
-        "psalm:fix": "@psalm:alter --issues=UnnecessaryVarAnnotation,MissingPureAnnotation,MissingImmutableAnnotation",
+        "psalm:fix": "@psalm:alter --issues=UnnecessaryVarAnnotation",
         "psalm:security": "@psalm --no-diff --taint-analysis",
         "psalm:shepherd": "@psalm --no-diff --shepherd --stats",
         "psalm:update": "@psalm --no-diff --update-baseline=psalm-baseline.xml",
         "rector": "@bin_rector",
+        "rector:dry-run": "@rector --dry-run",
         "test": [
             "@phpunit",
             "@psalm:shepherd",
