@@ -9,12 +9,13 @@ use DateTimeZone;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\LocalizedClockInterface;
 use Override;
+use Tests\Unit\LocalizedClockTest;
 use Throwable;
 
 /**
  * A clock that returns the current time in a given timezone.
  *
- * @see \Tests\Unit\LocalizedClockTest
+ * @see LocalizedClockTest
  *
  * @immutable
  */
@@ -22,7 +23,12 @@ final readonly class LocalizedClock implements LocalizedClockInterface
 {
     private function __construct(
         private DateTimeZone $dateTimeZone
-    ) {
+    ) {}
+
+    #[Override]
+    public static function new(DateTimeZone $dateTimeZone = new DateTimeZone('UTC')): self
+    {
+        return new self($dateTimeZone);
     }
 
     /**
@@ -41,11 +47,5 @@ final readonly class LocalizedClock implements LocalizedClockInterface
     public function now(): DateTimeImmutable
     {
         return new DateTimeImmutable('now', $this->dateTimeZone);
-    }
-
-    #[Override]
-    public static function new(DateTimeZone $dateTimeZone = new DateTimeZone('UTC')): self
-    {
-        return new self($dateTimeZone);
     }
 }
