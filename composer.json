@@ -19,7 +19,6 @@
     "support": {
         "issues": "https://github.com/ghostwriter/clock/issues",
         "source": "https://github.com/ghostwriter/clock",
-        "docs": "https://github.com/ghostwriter/clock",
         "rss": "https://github.com/ghostwriter/clock/releases.atom",
         "security": "https://github.com/ghostwriter/clock/security/advisories/new"
     },
@@ -38,22 +37,22 @@
         "php": ">=8.3"
     },
     "require-dev": {
-        "ghostwriter/coding-standard": "@dev",
-        "ghostwriter/psalm-plugin": "@dev"
+        "ghostwriter/coding-standard": "dev-main",
+        "ghostwriter/psalm-plugin": "dev-main"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
-            "Ghostwriter\\Clock\\": "src"
+            "Ghostwriter\\Clock\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests"
+            "Tests\\Unit\\": "tests/unit/"
         },
         "exclude-from-classmap": [
-            "/tests/Fixture/"
+            "tests/fixture/"
         ]
     },
     "config": {
@@ -75,14 +74,20 @@
     },
     "scripts": {
         "bin_ecs": "ecs check --clear-cache --no-interaction",
-        "bin_infection": "vendor/ghostwriter/coding-standard/tools/infection --ansi --show-mutations --threads=max --min-msi=0 --min-covered-msi=0",
+        "bin_infection": [
+            "@xdebug",
+            "vendor/ghostwriter/coding-standard/tools/infection --ansi --show-mutations --threads=max --min-msi=0 --min-covered-msi=0"
+        ],
         "bin_phive": "vendor/ghostwriter/coding-standard/tools/phive",
-        "bin_phpunit": "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always",
+        "bin_phpunit": [
+            "@xdebug",
+            "vendor/ghostwriter/coding-standard/tools/phpunit --do-not-cache-result --colors=always"
+        ],
         "bin_psalm": "vendor/ghostwriter/coding-standard/tools/psalm --no-cache",
         "bin_rector": "rector process --no-ansi --clear-cache",
         "cache:clear": "rm -rf ./.cache/*",
         "check": [
-            "@composer validate",
+            "vendor/ghostwriter/coding-standard/tools/composer validate",
             "@ecs",
             "@test"
         ],
@@ -112,6 +117,7 @@
             "@phpunit",
             "@psalm:shepherd",
             "@infection"
-        ]
+        ],
+        "xdebug": "@putenv XDEBUG_MODE=coverage"
     }
 }
