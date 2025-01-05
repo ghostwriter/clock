@@ -7,11 +7,12 @@ namespace Ghostwriter\Clock;
 use DateTimeImmutable;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Override;
+use Tests\Unit\FrozenClockTest;
 
 /**
  * A clock that returns frozen time.
  *
- * @see \Tests\Unit\FrozenClockTest
+ * @see FrozenClockTest
  *
  * @immutable
  */
@@ -19,7 +20,12 @@ final readonly class FrozenClock implements FrozenClockInterface
 {
     private function __construct(
         private DateTimeImmutable $dateTimeImmutable
-    ) {
+    ) {}
+
+    #[Override]
+    public static function new(DateTimeImmutable $dateTimeImmutable = new DateTimeImmutable()): self
+    {
+        return new self($dateTimeImmutable);
     }
 
     #[Override]
@@ -32,11 +38,5 @@ final readonly class FrozenClock implements FrozenClockInterface
     public function now(): DateTimeImmutable
     {
         return $this->dateTimeImmutable;
-    }
-
-    #[Override]
-    public static function new(DateTimeImmutable $dateTimeImmutable = new DateTimeImmutable()): self
-    {
-        return new self($dateTimeImmutable);
     }
 }
