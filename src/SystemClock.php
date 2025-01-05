@@ -9,6 +9,7 @@ use DateTimeZone;
 use Ghostwriter\Clock\Interface\FrozenClockInterface;
 use Ghostwriter\Clock\Interface\SystemClockInterface;
 use Override;
+use Tests\Unit\SystemClockTest;
 use Throwable;
 
 use function date_default_timezone_get;
@@ -16,7 +17,7 @@ use function date_default_timezone_get;
 /**
  * A clock that returns the current time in the system timezone via `date_default_timezone_set()`.
  *
- * @see \Tests\Unit\SystemClockTest
+ * @see SystemClockTest
  *
  * @immutable
  */
@@ -24,7 +25,15 @@ final readonly class SystemClock implements SystemClockInterface
 {
     public function __construct(
         private DateTimeZone $dateTimeZone
-    ) {
+    ) {}
+
+    /**
+     * @throws Throwable
+     */
+    #[Override]
+    public static function new(): SystemClockInterface
+    {
+        return new self(new DateTimeZone(date_default_timezone_get()));
     }
 
     /**
@@ -43,14 +52,5 @@ final readonly class SystemClock implements SystemClockInterface
     public function now(): DateTimeImmutable
     {
         return new DateTimeImmutable('now', $this->dateTimeZone);
-    }
-
-    /**
-     * @throws Throwable
-     */
-    #[Override]
-    public static function new(): SystemClockInterface
-    {
-        return new self(new DateTimeZone(date_default_timezone_get()));
     }
 }
