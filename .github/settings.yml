@@ -3,7 +3,6 @@
   "description": "Provides a Clock implementation for PHP"
   "homepage": "https://github.com/ghostwriter/clock"
   "topics": "clock, ghostwriter"
-  "private": false
   "has_issues": true
   "has_projects": false
   "has_wiki": false
