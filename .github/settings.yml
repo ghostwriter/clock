@@ -26,10 +26,7 @@
 "repository":
   "name": "clock"
   "description": "Provides a Clock implementation for PHP"
-  "topics":
-    - "ghostwriter"
-    - "clock"
-    - "php"
+  "topics": "ghostwriter, clock, php"
   "homepage": "https://github.com/ghostwriter/clock"
   "default_branch": "3.0.x"
   "allow_auto_merge": true
