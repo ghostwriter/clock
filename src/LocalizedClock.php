@@ -31,18 +31,14 @@ final readonly class LocalizedClock implements LocalizedClockInterface
         return new self($dateTimeZone);
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function freeze(): FrozenClockInterface
     {
         return FrozenClock::new($this->now());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function now(): DateTimeImmutable
     {
