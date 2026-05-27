@@ -6,7 +6,7 @@ namespace Ghostwriter\Clock\Interface;
 
 use DateTimeImmutable;
 
-interface ClockInterface
+interface ClockInterface extends \Psr\Clock\ClockInterface
 {
     public function freeze(): FrozenClockInterface;
 
