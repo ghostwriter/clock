@@ -14,15 +14,14 @@ use PHPUnit\Framework\TestCase;
 use Throwable;
 
 use function date_default_timezone_get;
+use function is_a;
 
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(LocalizedClock::class)]
 #[CoversClass(SystemClock::class)]
 final class SystemClockTest extends TestCase
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testDefaultTimezone(): void
     {
         $systemClock = SystemClock::new();
@@ -32,9 +31,7 @@ final class SystemClockTest extends TestCase
         self::assertSame(date_default_timezone_get(), $now->getTimezone()->getName());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testFreeze(): void
     {
         $systemClock = SystemClock::new();
@@ -50,18 +47,25 @@ final class SystemClockTest extends TestCase
         self::assertSame($now->getTimestamp(), $frozenClock->now()->getTimestamp());
     }
 
-    /**
-     * @throws Throwable
-     */
-    public function testInstanceOfClockInterface(): void
+    /** @throws Throwable */
+    public function testImplementsGhostwriterClockInterfaceClockInterface(): void
     {
-        $systemClock = SystemClock::new();
-
-        self::assertInstanceOf(ClockInterface::class, $systemClock);
-        self::assertInstanceOf(SystemClockInterface::class, $systemClock);
-        self::assertInstanceOf(SystemClock::class, $systemClock);
+        self::assertTrue(is_a(SystemClock::class, ClockInterface::class, true));
     }
 
+    /** @throws Throwable */
+    public function testImplementsGhostwriterClockInterfaceSystemClockInterface(): void
+    {
+        self::assertTrue(is_a(SystemClock::class, SystemClockInterface::class, true));
+    }
+
+    /** @throws Throwable */
+    public function testImplementsPsrClockClockInterface(): void
+    {
+        self::assertTrue(is_a(SystemClock::class, \Psr\Clock\ClockInterface::class, true));
+    }
+
+    /** @throws Throwable */
     public function testNow(): void
     {
         $systemClock = SystemClock::new();
