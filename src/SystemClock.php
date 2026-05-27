@@ -27,27 +27,21 @@ final readonly class SystemClock implements SystemClockInterface
         private DateTimeZone $dateTimeZone
     ) {}
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public static function new(): SystemClockInterface
     {
         return new self(new DateTimeZone(date_default_timezone_get()));
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function freeze(): FrozenClockInterface
     {
         return FrozenClock::new($this->now());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     #[Override]
     public function now(): DateTimeImmutable
     {

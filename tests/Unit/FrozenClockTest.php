@@ -13,14 +13,14 @@ use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
+use function is_a;
+
 #[CoversClass(FrozenClock::class)]
 #[CoversClass(LocalizedClock::class)]
 #[CoversClass(SystemClock::class)]
 final class FrozenClockTest extends TestCase
 {
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testDefaultTimezone(): void
     {
         $now = FrozenClock::new()->now();
@@ -28,9 +28,7 @@ final class FrozenClockTest extends TestCase
         self::assertSame('UTC', $now->getTimezone()->getName());
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
     public function testFreeze(): void
     {
         $frozenClock = FrozenClock::new();
@@ -41,8 +39,6 @@ final class FrozenClockTest extends TestCase
 
         $frozen = $frozenClock->freeze();
 
-        self::assertInstanceOf(FrozenClock::class, $frozen);
-        self::assertInstanceOf(FrozenClockInterface::class, $frozen);
         self::assertSame($frozenClock, $frozen);
 
         $frozenNow = $frozen->now();
@@ -51,21 +47,25 @@ final class FrozenClockTest extends TestCase
         self::assertSame($now->getTimestamp(), $frozenNow->getTimestamp());
     }
 
-    /**
-     * @throws Throwable
-     */
-    public function testInstanceOfClockInterface(): void
+    /** @throws Throwable */
+    public function testImplementsGhostwriterClockInterfaceClockInterface(): void
     {
-        $frozenClock = FrozenClock::new();
-
-        self::assertInstanceOf(ClockInterface::class, $frozenClock);
-        self::assertInstanceOf(FrozenClock::class, $frozenClock);
-        self::assertInstanceOf(FrozenClockInterface::class, $frozenClock);
+        self::assertTrue(is_a(FrozenClock::class, ClockInterface::class, true));
     }
 
-    /**
-     * @throws Throwable
-     */
+    /** @throws Throwable */
+    public function testImplementsGhostwriterClockInterfaceFrozenClockInterface(): void
+    {
+        self::assertTrue(is_a(FrozenClock::class, FrozenClockInterface::class, true));
+    }
+
+    /** @throws Throwable */
+    public function testImplementsPsrClockClockInterface(): void
+    {
+        self::assertTrue(is_a(FrozenClock::class, \Psr\Clock\ClockInterface::class, true));
+    }
+
+    /** @throws Throwable */
     public function testNow(): void
     {
         $frozenClock = FrozenClock::new();
