@@ -31,12 +31,14 @@
     "_comment": ["#BlackLivesMatter", "#FreePalestine", "#StandWithIran", "#StandWithUkraine", "#StopGenocide"],
     "require": {
         "php": "~8.4.0 || ~8.5.0",
-        "ext-mbstring": "*"
+        "ext-mbstring": "*",
+        "psr/clock": "^1.0.0"
     },
     "require-dev": {
         "ext-xdebug": "*",
         "boundwize/structarmed": "^0.7.12",
         "ghostwriter/coding-standard": "dev-main",
+        "ghostwriter/container": "^7.0.2",
         "ghostwriter/testify": "^0.1.1",
         "mockery/mockery": "^1.6.12",
         "phpunit/phpunit": "^13.1.12",
@@ -90,6 +92,11 @@
         "xdebug": "@putenv XDEBUG_MODE=coverage"
     },
     "extra": {
+        "ghostwriter": {
+            "container": {
+                "provider": ["Ghostwriter\\Clock\\Container\\ClockProvider"]
+            }
+        },
         "thanks": {
             "name": "ghostwriter/clock",
             "url": "https://github.com/ghostwriter/clock"
